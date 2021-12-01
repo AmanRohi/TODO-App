@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a97f35ca56.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/todoapp.css">
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+    <div class="container">
+        <section class="header">
+            <div class="header-in">
+                <p class="title">Plan <br> your Day </p>
+                <span id=Date>
+                    <span><i class="far fa-calendar-minus"></i></span>&nbsp;
+                    <span id="dd">15</span>&nbsp;
+                    <span id="mm">Jan</span>&nbsp;
+                    <span id="yy">2022</span>&nbsp;
+                    <span id="day">Wednesday</span>
+                </span>
+            </div>
+            <div class="overlay-date">
+                <span id="hours">23</span>&nbsp;
+                <span> : </span>&nbsp;
+                <span id="minutes">05</span>
+            </div>
+        </section>
+        <section class="body">
+            <div id=body-title> TODO's </div>
+            <div class="inbox">
+                <div class="empty-taskBox inVisible">
+                    <i class="far fa-calendar-alt"></i>
+                    <p id="disp-mess">No Task Found</p>
+                    <p id="offer">Schedule a task </p>
+                </div>
+                <% for(let i of todolist) {%>
+                    <div class="task">
+                        <div class="bookmark">
+                            <i class="fas far "></i>
+                        </div>
+                        <div class="info">
+                            <div class="task-name-disp <%= (i.Status=="Completed") ? "line-through" : "dummy"%>">
+                                <%= i.Task_Name%>
+                            </div>
+                            <div class="date-disp">
+                                <i class="far fa-calendar"></i> Deadline : <%= i.Due_Date%>
+                            </div>
+                        </div>
+                        <div class='category-out'>
+                            <div class="category">
+                                <%= i.Category%>
+                            </div>
+                        </div>
+                        <a href="/update_data/toggle_Status?id=<%=i.id%>&prevS=<%=i.Status%>" class="check">
+                            <i class="fas fa-check-circle"></i>
+                        </a>
+                        <a href="/delete_data?id=<%=i.id%>" class="trash">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                <%}%>
+            </div>
+
+        </section>
+        <section class="footer-btn">
+            <div class="out-add-btn">
+                <i class="fas fa-plus"></i> Add Task
+            </div>
+            <div class="out-add-cir-btn">
+                <i class="fas fa-plus"></i>
+            </div>
+        </section>
+        
+        <section class="overlay-add-task hide">
+            <div class="add_task">
+                <div class="cross">
+                    <i class="fas fa-times"></i>
+                </div>
+                <form action="/record_data" method="POST" autocomplete="off">
+                    <div class="form-elements">
+                        <label  class="labels" for="Task_Name">Task Name</label>
+                        <input id = "name" class="input-field" name="Task_Name" type="text" placeholder="Enter the task name" required>
+                    </div>
+                    <div class="optionContainer">
+                        <div class="form-elements">
+                            <label class="labels" for="Category">Category</label>
+                            <select class="input-field category-field" name="Category">
+                                <option>Choose your category</option>
+                                <option value="Work">Work</option>
+                                <option value="School">School</option>
+                                <option value="Personal">Personal</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-elements">
+                            <label class="labels" for="Due_Date">Due Date</label>
+                            <input class="input-field date-field" name="Due_Date" type="date">
+                        </div>
+                    </div>
+                    <button class="btn">
+                        <i class="fas fa-plus"></i>&nbsp; Add Task
+                    </button>
+                </form>
+            </div>
+        </section>
+        
+
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
